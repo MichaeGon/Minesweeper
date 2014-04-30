@@ -12,6 +12,9 @@ const int sqrSize = 50;
 
 
 namespace {
+	// MGViewControllerクラスのインスタンスはアプリ上に１つしかないものとする
+	MGViewController* owner;
+
 	// タイトル
 	char* title = "Minesweeper";
 
@@ -77,6 +80,16 @@ namespace {
 
 MGViewController::MGViewController(int argc, char** argv)
 {
+	flag = new bool*[sqrNum];
+	for (int i = 0; i < sqrNum; i++) {
+		flag[i] = new bool[sqrNum];
+		for (int j = 0; j < sqrNum; j++) {
+			flag[i][j] = false;
+		}
+	}
+
+	owner = this;
+
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 	glutInitWindowPosition(100, 100);
@@ -87,6 +100,10 @@ MGViewController::MGViewController(int argc, char** argv)
 
 MGViewController::~MGViewController()
 {
+	for (int i = 0; i < sqrNum; i++) {
+		delete[] flag[i];
+	}
+	delete[] flag;
 }
 
 void MGViewController::viewMain()

@@ -1,11 +1,12 @@
 #ifndef ___MGAPPLICATIONMAIN___
 #define ___MGAPPLICATIONMAIN___
 #include <omp.h>
-#include <ctime>
 #include <cstdlib>
+#include <iostream>
 #include <GL/glut.h>
 #include "MGViewController.h"
 #include "MGBoard.h"
+#include "MGPiece.h"
 #include "common.h"
 using namespace std;
 
@@ -16,11 +17,7 @@ private:
 	MGBoard model;
 
 public:
-	MGApplicationMain(int argc, char** argv) :view(argc, argv), model()
-	{
-		srand(time(NULL));
-	}
-
+	MGApplicationMain(int argc, char** argv) :view(argc, argv), model(){}
 	~MGApplicationMain();
 
 	void appMain();

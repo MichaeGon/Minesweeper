@@ -82,7 +82,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MGApplicationMain.cpp" />
     <ClCompile Include="MGBoard.cpp" />
-    <ClCompile Include="MGPiece.cpp" />
     <ClCompile Include="MGViewController.cpp" />
   </ItemGroup>
   <ItemGroup>

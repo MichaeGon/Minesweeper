@@ -15,7 +15,7 @@ void mouse(int button, int state, int x, int y)
 		switch (button) {
 		case GLUT_LEFT_BUTTON:
 			if (state == GLUT_DOWN) {
-				cout << sqrX << ',' << sqrY << '\n';
+				
 				glutPostRedisplay();
 			}
 			break;
@@ -59,6 +59,11 @@ void MGApplicationMain::appMain()
 		}
 #pragma omp section
 		{
-	}
+			while (true) {
+				// ここに内部処理を書く
+
+				// modelのボードデータをviewへ引き渡す
+			}
+		}
 	}
 }
