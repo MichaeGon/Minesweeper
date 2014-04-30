@@ -2,7 +2,6 @@
 #define ___MGVIEWCONTROLLER___
 #define _USE_MATH_DEFINES
 #include <cmath>
-#include <cstdlib>
 #include <iostream>
 #include <GL/glut.h>
 #include "common.h"
