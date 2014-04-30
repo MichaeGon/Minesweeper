@@ -13,4 +13,7 @@ extern int height; // ウィンドウの縦幅
 void mouse(int, int, int, int); // マウス
 void keyboard(unsigned char, int, int); // キーボード
 
+
+
+
 #endif
