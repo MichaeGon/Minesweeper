@@ -1,9 +1,9 @@
 Minesweeper
 ===========
 
-ƒm[ƒ}ƒ‹‚Èƒ}ƒCƒ“ƒXƒC[ƒp[
+ãƒŽãƒ¼ãƒžãƒ«ãªãƒžã‚¤ãƒ³ã‚¹ã‚¤ãƒ¼ãƒ‘ãƒ¼
 
-Visual Studio‚ÅƒRƒ“ƒpƒCƒ‹‚·‚é‚Æ‚«
+Visual Studioã§ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã™ã‚‹ã¨ã
 =================================
 
-ƒƒjƒ…[ - ƒvƒƒWƒFƒNƒg - uƒvƒƒWƒFƒNƒg–¼v‚ÌƒvƒƒpƒeƒB - \¬ƒvƒƒpƒeƒB - C/C++ - Œ¾Œê ‚Ì’†‚Ì OpenMP‚ÌƒTƒ|[ƒg—“‚ðu‚Í‚¢(/openmp)v‚É‚µ‚Ä‚­‚¾‚³‚¢
+ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒãƒ¼ - ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ - ã€Œãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆåã€ã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ - æ§‹æˆãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ - C/C++ - è¨€èªž ã®ä¸­ã® OpenMPã®ã‚µãƒãƒ¼ãƒˆæ¬„ã‚’ã€Œã¯ã„(/openmp)ã€ã«ã—ã¦ãã ã•ã„
