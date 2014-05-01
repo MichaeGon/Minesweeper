@@ -17,7 +17,8 @@ private:
 	MGBoard model;
 
 public:
-	MGApplicationMain(int argc, char** argv) :view(argc, argv), model(){}
+	MGApplicationMain(int argc, char** argv);
+
 	~MGApplicationMain();
 
 	void appMain();

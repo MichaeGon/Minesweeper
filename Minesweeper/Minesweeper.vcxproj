@@ -90,6 +90,7 @@
     <ClInclude Include="MGBoard.h" />
     <ClInclude Include="MGPiece.h" />
     <ClInclude Include="MGViewController.h" />
+    <ClInclude Include="MGViewData.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

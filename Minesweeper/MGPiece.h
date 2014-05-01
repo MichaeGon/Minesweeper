@@ -6,7 +6,7 @@ using namespace std;
 
 class MGPiece
 {
-private:
+protected:
 	unsigned long group; // グループ
 	int num; // 周囲の爆弾数 SENTINELでそのマスは爆弾
 

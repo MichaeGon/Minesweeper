@@ -2,6 +2,8 @@
 
 bool mvSwitch = true;
 
+
+
 void mouse(int button, int state, int x, int y)
 {
 	int tmpx = x*(sqrNum + 2) / width;
@@ -41,6 +43,19 @@ void keyboard(unsigned char key, int x, int y)
 	default:
 		break;
 	}
+}
+
+namespace {
+	// この名前空間内で使用できるポインタに各インスタンスを渡しておいてここでデータのやり取りをする
+	MGViewController* vptr;
+	MGBoard* bptr;
+
+}
+
+MGApplicationMain::MGApplicationMain(int argc, char** argv) :view(argc, argv), model()
+{
+	vptr = &view;
+	bptr = &model;
 }
 
 MGApplicationMain::~MGApplicationMain()

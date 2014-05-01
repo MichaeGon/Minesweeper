@@ -1,10 +1,10 @@
 #include "MGViewController.h"
 
-int sqrNum = 6;
+int sqrNum = 9;
 int sqrX = SENTINEL;
 int sqrY = SENTINEL;
-int width = 500;
-int height = 500;
+int width = 600;
+int height = 600;
 
 
 // マス目の描画サイズ
@@ -12,14 +12,31 @@ const int sqrSize = 50;
 
 
 namespace {
-	// MGViewControllerクラスのインスタンスはアプリ上に１つしかないものとする
+	// 自身へのポインタをこの名前空間で使えるようにして、この名前空間中の関数を擬似的にメンバ関数のように扱う（というか扱いたい）
 	MGViewController* owner;
 
 	// タイトル
 	char* title = "Minesweeper";
+	// 数字集
+	char* numbers = "012345678";
 
-	// 青
-	double blue[]={0.25, 0.25, 1.0};
+	// 色の列挙体 配列colorsを指定するのに使用するのを想定(2とついているもののほうが暗い色)
+	enum color { Gray, Blue, Green, Red, Blue2, Brown, Green2, Red2, Purple, Yellow };
+	// 色配列
+	double colors[][3] = {
+		{ 0.95, 0.95, 0.95 },
+		{ 0.25, 0.25, 1.0 },
+		{ 0.0, 0.75, 0.0 },
+		{ 0.9, 0.1, 0.1 },
+		{ 0.4, 0.4, 1.0 },
+		{ 0.6, 0.25, 0.1 },
+		{ 0.28, 0.73, 0.42 },
+		{ 0.6, 0.0, 0.0 },
+		{ 0.3, 0.0, 0.3 },
+		{ 1.0, 1.0, 0.0 }
+	};
+
+
 
 
 	// マス目の描画
@@ -34,6 +51,23 @@ namespace {
 		glEnd();
 	}
 
+	// 押されたマス目の描画
+	void displayPushedPiece(int x, int y)
+	{
+		// 爆弾数取得
+		int num = owner->Data(x, y).Num();
+
+		// 数字描画
+		if (num > 0) {
+			glColor3dv(colors[num]);
+			glRasterPos2d(sqrSize*4.0 / 5.0, sqrSize*4.0 / 5.0);
+			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, numbers[num]);
+		}
+
+		// マス目の色をGrayにする
+		displayPiece(x, y, colors[Gray]);
+	}
+
 	// ボードの基礎の描画
 	void displayBoard()
 	{
@@ -46,7 +80,7 @@ namespace {
 
 		for (int i = 0; i < sqrNum; i++) {
 			for (int j = 0; j < sqrNum; j++) {
-				displayPiece(i, j, blue);
+				displayPiece(i, j, colors[Blue]);
 			}
 		}
 	}
@@ -55,7 +89,11 @@ namespace {
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		// ボードの基礎を描画
 		displayBoard();
+
+		// データに沿って追加描画
+
 
 		glutSwapBuffers();
 	}
@@ -80,12 +118,9 @@ namespace {
 
 MGViewController::MGViewController(int argc, char** argv)
 {
-	flag = new bool*[sqrNum];
+	data = new MGViewData*[sqrNum];
 	for (int i = 0; i < sqrNum; i++) {
-		flag[i] = new bool[sqrNum];
-		for (int j = 0; j < sqrNum; j++) {
-			flag[i][j] = false;
-		}
+		data[i] = new MGViewData[sqrNum];
 	}
 
 	owner = this;
@@ -101,9 +136,9 @@ MGViewController::MGViewController(int argc, char** argv)
 MGViewController::~MGViewController()
 {
 	for (int i = 0; i < sqrNum; i++) {
-		delete[] flag[i];
+		delete[] data[i];
 	}
-	delete[] flag;
+	delete[] data;
 }
 
 void MGViewController::viewMain()
