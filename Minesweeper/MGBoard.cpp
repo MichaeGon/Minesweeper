@@ -91,7 +91,7 @@ void MGBoard::open(int x, int y)
 
 void MGBoard::sync(int i, int j, int x, int y)
 {
-	if ((board[i][j].Num() == 0 && board[x][y].Num() == 0) || board[i][j].Num() > 0) {
+	if (board[x][y].Num() == 0) {
 		board[i][j] |= board[x][y];
 	}
 }
@@ -105,9 +105,7 @@ void MGBoard::grooping()
 				// 以下では爆弾以外について考える
 				// 上下左右の１マスを調べる
 
-				// グループ同期のルール:
-				// 周囲の爆弾数0のところは周囲の爆弾数0のところとグループ同期
-				// 周囲の爆弾数1以上のところは周囲すべてと同期
+				// 周囲の爆弾数0のところとグループ同期
 
 				int x = i, y = j - 1;
 				if (y >= 0 && y < sqrNum) {
@@ -132,7 +130,8 @@ void MGBoard::grooping()
 
 				// ここまでで周囲とのグループ同期は完了
 				// ここでまだグループ未所属(0)ならば新規グループを作る
-				if (board[i][j].Group() == 0) {
+				// ただし周囲の爆弾数0のところに限る
+				if (board[i][j].Group() == 0 && board[i][j].Num() == 0) {
 					try {
 						newGroup(i, j);
 					}
