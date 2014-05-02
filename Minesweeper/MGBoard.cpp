@@ -3,7 +3,7 @@
 
 MGBoard::MGBoard()
 {
-	srand(time(NULL));
+	srand(static_cast<unsigned>(time(NULL)));
 
 	board = new MGPiece*[sqrNum];
 	for (int i = 0; i < sqrNum; i++) {
@@ -14,13 +14,25 @@ MGBoard::MGBoard()
 
 	// 爆弾含有率15%
 	bomb = sqrNum*sqrNum * 15 / 100;
+}
 
+
+MGBoard::~MGBoard()
+{
+	for (int i = 0; i < sqrNum; i++) {
+		delete[] board[i];
+	}
+	delete[] board;
+}
+
+void MGBoard::initBomb(int x0, int y0)
+{
 	// 爆弾を配置する
 	for (int count = 0; count < bomb; count++) {
 		int x = rand() % sqrNum;
 		int y = rand() % sqrNum;
 
-		if (board[x][y].Num() != SENTINEL) {
+		if (board[x][y].Num() != SENTINEL && x!=x0 && y!=y0) {
 			// 爆弾が設置されているところでないなら爆弾を設置
 			board[x][y].setBomb();
 		}
@@ -50,21 +62,43 @@ MGBoard::MGBoard()
 			}
 		}
 	}
+
+	// グループ化
+	grooping();
 }
 
-
-MGBoard::~MGBoard()
+void MGBoard::open(int x, int y)
 {
-	for (int i = 0; i < sqrNum; i++) {
-		delete[] board[i];
+	// 指定されたマス目をオープン
+	board[x][y].setPushed();
+
+	if (board[x][y].Num() == SENTINEL) {
+		// 爆弾だったら
+		exit(0);
 	}
-	delete[] board;
+	else if (board[x][y].Num() == 0) {
+		// 押したところの周囲に爆弾がなければ
+		// 同じグループのマス目をすべてオープンにする
+		for (int i = 0; i < sqrNum; i++) {
+			for (int j = 0; j < sqrNum; j++) {
+				if (board[x][y] & board[i][j]) {
+					board[i][j].setPushed();
+				}
+			}
+		}
+	}
 }
 
+void MGBoard::sync(int i, int j, int x, int y)
+{
+	if ((board[i][j].Num() == 0 && board[x][y].Num() == 0) || board[i][j].Num() > 0) {
+		board[i][j] |= board[x][y];
+	}
+}
 
 void MGBoard::grooping()
 {
-	for (int i = 0; i < sqrNum; i++) {
+	for (int i = 0; i <sqrNum; i++) {
 		for (int j = 0; j < sqrNum; j++) {
 			if (board[i][j].Num() != SENTINEL) {
 				// 爆弾はグループなしとする
@@ -72,10 +106,55 @@ void MGBoard::grooping()
 				// 上下左右の１マスを調べる
 
 				// グループ同期のルール:
-				// 周囲の爆弾数0のところは周囲の爆弾数0のマスのグループとだけ同期
-				// 周囲の爆弾数1以上のところは周囲のマスのグループすべてと同期
+				// 周囲の爆弾数0のところは周囲の爆弾数0のところとグループ同期
+				// 周囲の爆弾数1以上のところは周囲すべてと同期
 
-				int x = i, y = j - 1; 
+				int x = i, y = j - 1;
+				if (y >= 0 && y < sqrNum) {
+					// １マス上のマスとグループを同期
+					sync(i, j, x, y);
+				}
+				y = j + 1;
+				if (y >= 0 && y < sqrNum) {
+					// １マス下のマスとグループを同期
+					sync(i, j, x, y);
+				}
+				x = i - 1, y = j;
+				if (x >= 0 && x < sqrNum) {
+					// １マス左のマスとグループを同期
+					sync(i, j, x, y);
+				}
+				x = i + 1;
+				if (x >= 0 && x < sqrNum) {
+					// １マス右のマスとグループを同期
+					sync(i, j, x, y);
+				}
+
+				// ここまでで周囲とのグループ同期は完了
+				// ここでまだグループ未所属(0)ならば新規グループを作る
+				if (board[i][j].Group() == 0) {
+					try {
+						newGroup(i, j);
+					}
+					catch (MGGroupError& err) {
+						cout << err;
+					}
+				}
+			}
+		}
+	}
+	// 逆から再度行う
+	for (int i = sqrNum-1; i >= 0; i--) {
+		for (int j = sqrNum-1; j >= 0; j--) {
+			if (board[i][j].Num() != SENTINEL) {
+				// 爆弾はグループなしとする
+				// 以下では爆弾以外について考える
+				// 上下左右の１マスを調べる
+
+				// グループ同期のルール:
+				// 周囲の爆弾数0のマスのグループとだけ同期
+
+				int x = i, y = j - 1;
 				if (y >= 0 && y < sqrNum) {
 					// １マス上のマスとグループを同期
 					sync(i, j, x, y);
@@ -123,4 +202,5 @@ void MGBoard::newGroup(int x, int y)
 
 	// 次のグループを更新
 	latest <<= 1;
+	cout << latest << '\n';
 }

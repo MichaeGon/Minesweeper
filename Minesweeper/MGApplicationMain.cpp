@@ -1,61 +1,51 @@
 #include "MGApplicationMain.h"
 
-bool mvSwitch = true;
+namespace {
+	MGApplicationMain* owner;
+	bool first = true; // はじめて左クリックされるまでtrueでいる
+}
 
-
-
-void mouse(int button, int state, int x, int y)
+// 描画の際呼び出される 
+void display()
 {
-	int tmpx = x*(sqrNum + 2) / width;
-	int tmpy = y*(sqrNum + 2) / height;
+	glClear(GL_COLOR_BUFFER_BIT);
 
-	// 盤面に収まっているか
-	if (tmpx > 0 && tmpy > 0 && tmpx <= sqrNum && tmpy <= sqrNum) {
-		sqrX = tmpx;
-		sqrY = tmpy;
+	// ボード基盤描画
+	displayBoard();
 
-		switch (button) {
-		case GLUT_LEFT_BUTTON:
-			if (state == GLUT_DOWN) {
-				
-				glutPostRedisplay();
+	if (!first) {
+		// 押されたマス目とフラグ描画
+		for (int i = 0; i < sqrNum; i++) {
+			for (int j = 0; j < sqrNum; j++) {
+				if (owner->Board(i,j).Pushed()) {
+					displayPushedPiece(i, j, owner->Board(i,j).Num());
+				}
 			}
-			break;
-		case GLUT_RIGHT_BUTTON:
-			if (state == GLUT_DOWN) {
-				// フラグ処理
-				glutPostRedisplay();
-			}
-			break;
-		default:
-			break;
 		}
 	}
+
+	glutSwapBuffers();
 }
 
-void keyboard(unsigned char key, int x, int y)
+void left(int x, int y)
 {
-	switch (key) {
-	case 'q':
-	case 'Q':
-	case '\033':
-		exit(0); // 改善の余地あり
-	default:
-		break;
-	}
+	owner->leftClick(x,y);
 }
 
-namespace {
-	// この名前空間内で使用できるポインタに各インスタンスを渡しておいてここでデータのやり取りをする
-	MGViewController* vptr;
-	MGBoard* bptr;
-
-}
-
-MGApplicationMain::MGApplicationMain(int argc, char** argv) :view(argc, argv), model()
+void right(int x, int y)
 {
-	vptr = &view;
-	bptr = &model;
+	owner->rightClick(x,y);
+}
+
+MGApplicationMain::MGApplicationMain(int argc, char** argv) : model()
+{
+	owner = this;
+
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
+	glutInitWindowPosition(100, 100);
+	glutInitWindowSize(width, height);
+	glutCreateWindow(title);
 }
 
 MGApplicationMain::~MGApplicationMain()
@@ -64,21 +54,35 @@ MGApplicationMain::~MGApplicationMain()
 
 void MGApplicationMain::appMain()
 {
-	// 描画と内部処理を別スレッドで行う
-#pragma omp parallel
-#pragma omp sections
-	{
-#pragma omp section
-		{
-			view.viewMain();
-		}
-#pragma omp section
-		{
-			while (true) {
-				// ここに内部処理を書く
+	// まずはウィンドウを表示してプレイヤーの指示待ちとする
+	glutDisplayFunc(display);
+	glutReshapeFunc(resize);
+	glutKeyboardFunc(keyboard);
+	glutMouseFunc(mouse);
+	glClearColor(0.18, 0.18, 0.18, 1.0);
+	glutMainLoop();
+}
 
-				// modelのボードデータをviewへ引き渡す
-			}
-		}
+void MGApplicationMain::leftClick(int x, int y)
+{
+	if (first) {
+		// はじめて盤面を左クリックされたとき
+		first = !first;
+
+		// 爆弾を配置する
+		model.initBomb(x, y);
 	}
+	
+	// オープン
+	model.open(x, y);
+
+	glutPostRedisplay();
+}
+
+void MGApplicationMain::rightClick(int x, int y)
+{
+	// フラグ反転
+	model[x][y].setFlag();
+
+	glutPostRedisplay();
 }

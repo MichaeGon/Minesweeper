@@ -9,9 +9,11 @@ class MGPiece
 protected:
 	unsigned long group; // グループ
 	int num; // 周囲の爆弾数 SENTINELでそのマスは爆弾
+	bool flag; // フラグ
+	bool pushed; // 押されたかどうか
 
 public:
-	MGPiece() :group(0), num(0) {}
+	MGPiece() :group(0), num(0), flag(false), pushed(false) {}
 
 	// 変換コンストラクタ
 	MGPiece(unsigned long val)
@@ -37,10 +39,35 @@ public:
 		return num;
 	}
 
+	// flag取得
+	bool Flag() const
+	{
+		return flag;
+	}
+
+	// pushed取得
+	bool Pushed() const
+	{
+		return pushed;
+	}
+
+
 	// numにSENTINELを入れる
 	void setBomb()
 	{
 		num = SENTINEL;
+	}
+
+	// pushedをtrueにする
+	void setPushed()
+	{
+		pushed = true;
+	}
+
+	// flag反転
+	void setFlag()
+	{
+		flag = !flag;
 	}
 
 

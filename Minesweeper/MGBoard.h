@@ -18,6 +18,9 @@ private:
 	// 爆弾の数
 	int bomb;
 
+	// グループ化のための関数
+	void sync(int i, int j, int x, int y);
+
 public:
 
 	// グループ操作に関するエラー
@@ -38,31 +41,12 @@ public:
 	MGBoard();
 	~MGBoard();
 
-	// ボードデータ取得
-	// 取得側で確実に開放すること
-	MGPiece** Board()
-	{
-		MGPiece** tmp = new MGPiece*[sqrNum];
-		for (int i = 0; i < sqrNum; i++) {
-			tmp[i] = new MGPiece[sqrNum];
-			for (int j = 0; j < sqrNum; j++) {
-				tmp[i][j] = board[i][j];
-			}
-		}
+	// ゲーム開始時の爆弾配置
+	// 引数にははじめて左クリックされたマス目の位置
+	void initBomb(int x0, int y0);
 
-		return tmp;
-	}
-	
-private:
-	// グループ化のための関数
-	void sync(int i, int j, int x, int y)
-	{
-		if ((board[i][j].Num() == 0 && board[x][y].Num() == SENTINEL) || board[i][j].Num() != 0) {
-			board[i][j] |= board[x][y];
-		}
-	}
-
-public:
+	// オープン処理
+	void open(int x, int y);
 
 	// グループ化
 	void grooping();
@@ -71,6 +55,24 @@ public:
 	// 受け取った引数の要素のところに新規グループを作る
 	void newGroup(int x, int y);
 
+
+
+	// 以下は演算子多重定義
+
+	// boardを通常の配列のように指定できるようにする
+	MGPiece*& operator[](int x)
+	{
+		// セーフティガード
+		if (x >= sqrNum || x < 0) {
+			cout << "\aエラー： 不正な配列の要素の指定です。\n 終了します。何か入力してください:";
+			int some;
+			cin >> some;
+			exit(1);
+		}
+		else {
+			return board[x];
+		}
+	}
 	
 };
 

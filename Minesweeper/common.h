@@ -4,13 +4,22 @@
 
 const int SENTINEL = -2; // 番兵ちゃん
 extern int sqrNum; // 一辺のマス目の数
-extern int sqrX; // 盤面のマス目の位置。左から何列目か。
-extern int sqrY; // 盤面のマス目の位置。上から何行目か。
-extern bool mvSwitch; // 処理切り替え用フラグ trueで内部データ処理優先、falseで描画優先
 extern int width; // ウィンドウの横幅
 extern int height; // ウィンドウの縦幅
+extern char* title; // アプリタイトル
 
-void mouse(int, int, int, int); // マウス
-void keyboard(unsigned char, int, int); // キーボード
+// 以下OpenGL関連
+
+void display(); // 描画の際呼び出される関数。描画したいときはこの中に書き込むこと
+void displayBoard(); // ボードの基盤を描画する
+void displayPiece(int x, int y, double color[]); //x,yで指定したマス目をcolor[]={R,G,B}でRGB指定した色で塗りつぶす(各値は0~1)
+void displayPushedPiece(int x, int y, int num); // x,yで指定したマス目にnumを描画する
+
+void resize(int w, int h); // 再描画前の処理に呼び出される
+void mouse(int button, int state, int x, int y); // マウス
+void keyboard(unsigned char key, int x, int y); // キーボード
+
+void left(int x, int y);
+void right(int x, int y);
 
 #endif
