@@ -1,8 +1,6 @@
 #ifndef ___MGAPPLICATIONMAIN___
 #define ___MGAPPLICATIONMAIN___
-#include <omp.h>
 #include <cstdlib>
-#include <iostream>
 #include <GL/glut.h>
 #include "MGBoard.h"
 #include "MGPiece.h"
@@ -20,7 +18,6 @@ public:
 	~MGApplicationMain();
 
 	// model.board[x][y]にアクセスする
-	// 下の関数を使わなくてもmodel[x][y]で取得できる
 	MGPiece& Board(int x, int y)
 	{
 		return model[x][y];

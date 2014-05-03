@@ -20,6 +20,7 @@ private:
 
 	// ƒOƒ‹[ƒv‰»‚Ì‚½‚ß‚ÌŠÖ”
 	void sync(int i, int j, int x, int y);
+	void syncall(int i, int j);
 
 public:
 

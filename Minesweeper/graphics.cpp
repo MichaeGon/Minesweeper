@@ -6,7 +6,7 @@
 using namespace std;
 
 char* title = "Minesweeper";
-int sqrNum = 15;
+int sqrNum = 20;
 int width = 600;
 int height = 600;
 
@@ -101,26 +101,21 @@ void keyboard(unsigned char key, int x, int y)
 
 void mouse(int button, int state, int x, int y)
 {
-	static int sqrX = SENTINEL;
-	static int sqrY = SENTINEL;
-
-	int tmpx = x*(sqrNum + 2) / width;
-	int tmpy = y*(sqrNum + 2) / height;
+	int sqrX = x*(sqrNum + 2) / width - 1;
+	int sqrY = y*(sqrNum + 2) / height - 1;
 
 	// ”Õ–Ê‚ÉŽû‚Ü‚Á‚Ä‚¢‚é‚©
-	if (tmpx > 0 && tmpy > 0 && tmpx <= sqrNum && tmpy <= sqrNum) {
-		sqrX = tmpx;
-		sqrY = tmpy;
+	if (sqrX >= 0 && sqrY >= 0 && sqrX < sqrNum && sqrY < sqrNum) {
 
 		switch (button) {
 		case GLUT_LEFT_BUTTON:
 			if (state == GLUT_DOWN) {
-				left(sqrX-1,sqrY-1);
+				left(sqrX,sqrY);
 			}
 			break;
 		case GLUT_RIGHT_BUTTON:
 			if (state == GLUT_DOWN) {
-				right(sqrX-1,sqrY-1);
+				right(sqrX,sqrY);
 			}
 			break;
 		default:
