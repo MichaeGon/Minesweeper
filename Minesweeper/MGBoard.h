@@ -16,11 +16,18 @@ private:
 	// 最新グループ(次に作るグループ)
 	unsigned long latest;
 	// 爆弾の数
-	int bomb;
+	unsigned bomb;
 
 	// グループ化のための関数
 	void sync(int i, int j, int x, int y);
 	void syncall(int i, int j);
+
+	// グループ化
+	void grooping();
+
+	// 新規グループ作成
+	// 受け取った引数の要素のところに新規グループを作る
+	void newGroup(int x, int y);
 
 public:
 
@@ -49,13 +56,8 @@ public:
 	// オープン処理
 	void open(int x, int y);
 
-	// グループ化
-	void grooping();
-
-	// 新規グループ作成
-	// 受け取った引数の要素のところに新規グループを作る
-	void newGroup(int x, int y);
-
+	// まだ開いていないマス目数-爆弾数を返す
+	unsigned getEmptyNum();
 
 
 	// 以下は演算子多重定義

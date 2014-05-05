@@ -168,3 +168,18 @@ void MGBoard::newGroup(int x, int y)
 	// 次のグループを更新
 	latest <<= 1;
 }
+
+unsigned MGBoard::getEmptyNum()
+{
+	unsigned count = 0;
+	// 空いていないマスをカウント
+	for (int i = 0; i < sqrNum; i++) {
+		for (int j = 0; j < sqrNum; j++) {
+			if (!board[i][j].Pushed()) {
+				count++;
+			}
+		}
+	}
+
+	return count - bomb;
+}

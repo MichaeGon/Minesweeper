@@ -18,7 +18,12 @@ void display()
 		for (int i = 0; i < sqrNum; i++) {
 			for (int j = 0; j < sqrNum; j++) {
 				if (owner->Board(i,j).Pushed()) {
+					// 押されたマスを描画
 					displayPushedPiece(i, j, owner->Board(i,j).Num());
+				}
+				else if (owner->Board(i, j).Flag()) {
+					// フラグが立ててあるマスを描画
+					displayFlagPiece(i, j);
 				}
 			}
 		}
@@ -76,7 +81,15 @@ void MGApplicationMain::leftClick(int x, int y)
 	// オープン
 	model.open(x, y);
 
+	// 再描画
 	glutPostRedisplay();
+
+	// クリア判定
+	// もし爆弾数と残り空いているマスの数が一致すればクリア
+	if (model.getEmptyNum() == 0) {
+		// クリア判定を書く
+		cout << "\aClear\n";
+	}
 }
 
 void MGApplicationMain::rightClick(int x, int y)

@@ -14,6 +14,7 @@ void display(); // •`‰æ‚ÌÛŒÄ‚Ño‚³‚ê‚éŠÖ”B•`‰æ‚µ‚½‚¢‚Æ‚«‚Í‚±‚Ì’†‚É‘‚«‚Ş‚±‚
 void displayBoard(); // ƒ{[ƒh‚ÌŠî”Õ‚ğ•`‰æ‚·‚é
 void displayPiece(int x, int y, double color[]); //x,y‚Åw’è‚µ‚½ƒ}ƒX–Ú‚ğcolor[]={R,G,B}‚ÅRGBw’è‚µ‚½F‚Å“h‚è‚Â‚Ô‚·(Še’l‚Í0~1)
 void displayPushedPiece(int x, int y, int num); // x,y‚Åw’è‚µ‚½ƒ}ƒX–Ú‚Énum‚ğ•`‰æ‚·‚é
+void displayFlagPiece(int x, int y); // x,y‚Åw’è‚µ‚½ƒ}ƒX–Ú‚Éƒtƒ‰ƒO‚ğ•`‰æ‚·‚é
 
 void resize(int w, int h); // Ä•`‰æ‘O‚Ìˆ—‚ÉŒÄ‚Ño‚³‚ê‚é
 void mouse(int button, int state, int x, int y); // ƒ}ƒEƒX

@@ -1,5 +1,3 @@
-#define _USE_MATH_DEFINES
-#include <ctime>
 #include <cstdlib>
 #include <GL/glut.h>
 #include "common.h"
@@ -56,8 +54,21 @@ void displayPushedPiece(int x, int y, int num)
 
 	// 数字描画
 	glColor3dv(colors[num]);
-	glRasterPos2d(sqrSize*(x + 1)+sqrSize*2.0 / 5.0, sqrSize*(y + 1)+sqrSize*4.0 / 5.0);
+	glRasterPos2d(sqrSize*(x + 1)+sqrSize*1.5 / 5.0, sqrSize*(y + 1)+sqrSize*4.0 / 5.0);
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, numbers[num]);
+}
+
+// フラグマス描画
+void displayFlagPiece(int x, int y)
+{
+	// マス目の色をYellowにする
+	displayPiece(x, y, colors[Yellow]);
+
+	// フラグ描画
+	char flag = 'F';
+	glColor3dv(colors[Red2]);
+	glRasterPos2d(sqrSize*(x + 1) + sqrSize*1.5 / 5.0, sqrSize*(y + 1) + sqrSize*4.0 / 5.0);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, flag);
 }
 
 // ボードの基礎の描画
