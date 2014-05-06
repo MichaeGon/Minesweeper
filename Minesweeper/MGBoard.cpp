@@ -1,6 +1,5 @@
 #include "MGBoard.h"
 
-
 MGBoard::MGBoard()
 {
 	srand(static_cast<unsigned>(time(NULL)));

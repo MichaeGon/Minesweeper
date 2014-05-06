@@ -53,10 +53,6 @@ MGApplicationMain::MGApplicationMain(int argc, char** argv) : model()
 	glutCreateWindow(title);
 }
 
-MGApplicationMain::~MGApplicationMain()
-{
-}
-
 void MGApplicationMain::appMain()
 {
 	// まずはウィンドウを表示してプレイヤーの指示待ちとする

@@ -16,7 +16,7 @@ private:
 	// 最新グループ(次に作るグループ)
 	unsigned long latest;
 	// 爆弾の数
-	unsigned bomb;
+	int bomb;
 
 	// グループ化のための関数
 	void sync(int i, int j, int x, int y);
@@ -38,7 +38,6 @@ public:
 
 	public:
 		MGGroupError() :err("\aエラー：グループ数の上限をオーバーしました\n盤面を小さくしてからもう一度新規にゲームをやり直してください\n"){}
-		~MGGroupError(){}
 
 		friend ostream& operator<<(ostream& s, const MGGroupError& err)
 		{
@@ -65,7 +64,6 @@ public:
 	// boardを通常の配列のように指定できるようにする
 	MGPiece*& operator[](int x)
 	{
-		// セーフティガード
 		if (x >= sqrNum || x < 0) {
 			cout << "\aエラー： 不正な配列の要素の指定です。\n 終了します。何か入力してください:";
 			int some;

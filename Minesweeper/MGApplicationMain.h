@@ -16,8 +16,6 @@ private:
 public:
 	MGApplicationMain(int argc, char** argv);
 
-	~MGApplicationMain();
-
 	// model.board[x][y]にアクセスする
 	MGPiece& Board(int x, int y)
 	{

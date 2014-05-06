@@ -4,7 +4,7 @@
 using namespace std;
 
 char* title = "Minesweeper";
-int sqrNum = 20;
+int sqrNum = 15;
 int width = 600;
 int height = 600;
 

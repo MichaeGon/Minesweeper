@@ -2,7 +2,6 @@
 #define ___MGPIECE___
 #include <climits>
 #include "common.h"
-using namespace std;
 
 class MGPiece
 {
@@ -20,12 +19,6 @@ public:
 	{
 		group = val;
 	}
-	MGPiece(int val)
-	{
-		num = val;
-	}
-
-	~MGPiece(){}
 
 	// groupŽæ“¾
 	unsigned long Group() const
