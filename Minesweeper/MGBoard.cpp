@@ -170,7 +170,7 @@ void MGBoard::newGroup(int x, int y)
 
 unsigned MGBoard::getEmptyNum()
 {
-	unsigned count = 0;
+	int count = 0;
 	// 空いていないマスをカウント
 	for (int i = 0; i < sqrNum; i++) {
 		for (int j = 0; j < sqrNum; j++) {

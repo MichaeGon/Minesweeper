@@ -15,6 +15,7 @@ void displayBoard(); // ボードの基盤を描画する
 void displayPiece(int x, int y, double color[]); //x,yで指定したマス目をcolor[]={R,G,B}でRGB指定した色で塗りつぶす(各値は0~1)
 void displayPushedPiece(int x, int y, int num); // x,yで指定したマス目にnumを描画する
 void displayFlagPiece(int x, int y); // x,yで指定したマス目にフラグを描画する
+void displayTime(time_t elapsed); // 経過時間を描画する
 
 void resize(int w, int h); // 再描画前の処理に呼び出される
 void mouse(int button, int state, int x, int y); // マウス

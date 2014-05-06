@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <ctime>
 #include <GL/glut.h>
 #include "common.h"
 using namespace std;
@@ -86,6 +87,11 @@ void displayBoard()
 			displayPiece(i, j, colors[Blue]);
 		}
 	}
+}
+
+void displayTime(time_t elapsed)
+{
+
 }
 
 void resize(int w, int h)
