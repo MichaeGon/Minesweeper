@@ -102,6 +102,22 @@ void displayTime(time_t elapsed)
 
 }
 
+void displayGrayBand()
+{
+	glColor3dv(colors[Gray]);
+	glBegin(GL_QUADS);
+	glVertex2d(0, height / 3);
+	glVertex2d(0, height * 2 / 3);
+	glVertex2d(width, height * 2 / 3);
+	glVertex2d(width, height / 3);
+	glEnd();
+}
+
+void displaySentenceOnBand(char* str)
+{
+
+}
+
 void resize(int w, int h)
 {
 	width = w;
