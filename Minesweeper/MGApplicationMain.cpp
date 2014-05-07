@@ -12,6 +12,7 @@ void display()
 
 	// ボード基盤描画
 	displayBoard();
+	displayBombNum(owner->Model().Bomb());
 
 	if (!first) {
 		// 押されたマス目とフラグ描画

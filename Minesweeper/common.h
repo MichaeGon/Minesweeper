@@ -18,6 +18,7 @@ void displayFlagPiece(int x, int y); // x,yで指定したマス目にフラグを描画する
 void displayTime(time_t elapsed); // 経過時間を描画する
 void displayGrayBand(); // 画面中央を横断するGrayの帯を表示する(この上に文字を描画することを想定している)
 void displaySentenceOnBand(char* str); // Grayの帯の上に文字を表示する(色指定は各自で。)
+void displayBombNum(int bomb); // 爆弾数として狩り引数の数値を表示する1
 
 void resize(int w, int h); // 再描画前の処理に呼び出される
 void mouse(int button, int state, int x, int y); // マウス

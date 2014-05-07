@@ -24,6 +24,12 @@ public:
 		return model[x][y];
 	}
 
+	// model取得
+	const MGBoard& Model() const
+	{
+		return model;
+	}
+
 	// 左クリック時の挙動 引数は押されたマスの場所
 	void leftClick(int x, int y);
 

@@ -5,7 +5,7 @@
 using namespace std;
 
 char* title = "Minesweeper";
-int sqrNum = 15;
+int sqrNum = 10;
 int width = 600;
 int height = 600;
 
@@ -118,6 +118,28 @@ void displayGrayBand()
 void displaySentenceOnBand(char* str)
 {
 
+}
+
+void displayBombNum(int bomb)
+{
+	// •`‰æ
+	glColor3d(1, 1, 1);
+	glRasterPos2d(sqrSize*(sqrNum-frame), sqrSize*(sqrNum + frame + 4.0 / 5.0));
+	for (char* name = "Bombs : "; *name; name++) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *name);
+	}
+	int* num = new int[bomb];
+	int i = 0;
+	while (bomb > 0) {
+		num[i++] = bomb % 10;
+		bomb /= 10;
+	}
+	i--;
+	while (i >= 0) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, numbers[num[i--]]);
+	}
+
+	delete[] num;
 }
 
 void resize(int w, int h)
