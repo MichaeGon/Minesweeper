@@ -34,7 +34,10 @@ void display()
 
 void left(int x, int y)
 {
-	owner->leftClick(x,y);
+	if (!owner->Board(x, y).Flag()) {
+		// ƒtƒ‰ƒO‚ª‚½‚Á‚Ä‚¢‚é‚Æ‚±‚ë‚Í”½‰ž‚µ‚È‚¢‚æ‚¤‚É‚·‚é
+		owner->leftClick(x, y);
+	}
 }
 
 void right(int x, int y)
@@ -60,6 +63,7 @@ void MGApplicationMain::appMain()
 	glutReshapeFunc(resize);
 	glutKeyboardFunc(keyboard);
 	glutMouseFunc(mouse);
+	glutIdleFunc(NULL);
 	glClearColor(0.18, 0.18, 0.18, 1.0);
 	glutMainLoop();
 }

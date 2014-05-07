@@ -62,14 +62,22 @@ void displayPushedPiece(int x, int y, int num)
 // フラグマス描画
 void displayFlagPiece(int x, int y)
 {
-	// マス目の色をYellowにする
-	displayPiece(x, y, colors[Yellow]);
-
-	// フラグ描画
-	char flag = 'F';
-	glColor3dv(colors[Red2]);
-	glRasterPos2d(sqrSize*(x + 1) + sqrSize*1.5 / 5.0, sqrSize*(y + 1) + sqrSize*4.0 / 5.0);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, flag);
+	// 旗の描画
+	glColor3dv(colors[Red]);
+	glBegin(GL_TRIANGLES);
+	glVertex2d(sqrSize*(x + 1) + sqrSize*1.5 / 5.0, sqrSize*(y + 1) + sqrSize*1.0 / 5.0);
+	glVertex2d(sqrSize*(x + 1) + sqrSize*1.5 / 5.0, sqrSize*(y + 1) + sqrSize*2.6 / 5.0);
+	glVertex2d(sqrSize*(x + 1) + sqrSize*4.0 / 5.0, sqrSize*(y + 1) + sqrSize*1.8 / 5.0);
+	glEnd();
+	
+	// 棒の描画
+	glColor3dv(colors[Gray]);
+	glBegin(GL_QUADS);
+	glVertex2d(sqrSize*(x + 1) + sqrSize*1.5 / 5.0, sqrSize*(y + 1) + sqrSize*1.0 / 5.0);
+	glVertex2d(sqrSize*(x + 1) + sqrSize*1.5 / 5.0, sqrSize*(y + 1) + sqrSize*4.0 / 5.0);
+	glVertex2d(sqrSize*(x + 1) + sqrSize*1.0 / 5.0, sqrSize*(y + 1) + sqrSize*4.0 / 5.0);
+	glVertex2d(sqrSize*(x + 1) + sqrSize*1.0 / 5.0, sqrSize*(y + 1) + sqrSize*1.0 / 5.0);
+	glEnd();
 }
 
 // ボードの基礎の描画

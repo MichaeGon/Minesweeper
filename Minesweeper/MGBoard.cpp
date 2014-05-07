@@ -80,6 +80,9 @@ void MGBoard::open(int x, int y)
 		// 同じグループのマス目をすべてオープンにする
 		for (int i = 0; i < sqrNum; i++) {
 			for (int j = 0; j < sqrNum; j++) {
+				// ただしフラグがたっているところはオープンにしない
+				if (board[i][j].Flag() && !board[i][j].Pushed()) continue;
+
 				if (board[x][y] & board[i][j]) {
 					board[i][j].setPushed();
 				}
