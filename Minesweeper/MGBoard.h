@@ -48,6 +48,12 @@ public:
 	MGBoard();
 	~MGBoard();
 
+	// 配置された爆弾数取得
+	int Bomb() const
+	{
+		return bomb;
+	}
+
 	// ゲーム開始時の爆弾配置
 	// 引数にははじめて左クリックされたマス目の位置
 	void initBomb(int x0, int y0);

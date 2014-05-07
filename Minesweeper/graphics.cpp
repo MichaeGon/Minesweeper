@@ -13,6 +13,8 @@ namespace {
 
 	// マス目の一辺大きさ
 	const int sqrSize = 50;
+	// 盤面外にマス目何マス分余白を作るか
+	const int frame = 2;
 
 	// 数字集
 	char* numbers = "012345678";
@@ -40,10 +42,10 @@ void displayPiece(int x, int y, double color[])
 {
 	glColor3dv(color);
 	glBegin(GL_QUADS);
-	glVertex2d(sqrSize*(x + 1), sqrSize*(y + 1));
-	glVertex2d(sqrSize*(x + 1.95), sqrSize*(y + 1));
-	glVertex2d(sqrSize*(x + 1.95), sqrSize*(y + 1.95));
-	glVertex2d(sqrSize*(x + 1), sqrSize*(y + 1.95));
+	glVertex2d(sqrSize*(x + frame), sqrSize*(y + frame));
+	glVertex2d(sqrSize*(x + frame + 0.95), sqrSize*(y + frame));
+	glVertex2d(sqrSize*(x + frame + 0.95), sqrSize*(y + frame + 0.95));
+	glVertex2d(sqrSize*(x + frame), sqrSize*(y + frame + 0.95));
 	glEnd();
 }
 
@@ -55,7 +57,7 @@ void displayPushedPiece(int x, int y, int num)
 
 	// 数字描画
 	glColor3dv(colors[num]);
-	glRasterPos2d(sqrSize*(x + 1)+sqrSize*1.5 / 5.0, sqrSize*(y + 1)+sqrSize*4.0 / 5.0);
+	glRasterPos2d(sqrSize*(x + frame)+sqrSize*1.5 / 5.0, sqrSize*(y + frame)+sqrSize*4.0 / 5.0);
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, numbers[num]);
 }
 
@@ -65,18 +67,18 @@ void displayFlagPiece(int x, int y)
 	// 旗の描画
 	glColor3dv(colors[Red]);
 	glBegin(GL_TRIANGLES);
-	glVertex2d(sqrSize*(x + 1) + sqrSize*1.5 / 5.0, sqrSize*(y + 1) + sqrSize*1.0 / 5.0);
-	glVertex2d(sqrSize*(x + 1) + sqrSize*1.5 / 5.0, sqrSize*(y + 1) + sqrSize*2.6 / 5.0);
-	glVertex2d(sqrSize*(x + 1) + sqrSize*4.0 / 5.0, sqrSize*(y + 1) + sqrSize*1.8 / 5.0);
+	glVertex2d(sqrSize*(x + frame) + sqrSize*1.5 / 5.0, sqrSize*(y + frame) + sqrSize*1.0 / 5.0);
+	glVertex2d(sqrSize*(x + frame) + sqrSize*1.5 / 5.0, sqrSize*(y + frame) + sqrSize*2.6 / 5.0);
+	glVertex2d(sqrSize*(x + frame) + sqrSize*4.0 / 5.0, sqrSize*(y + frame) + sqrSize*1.8 / 5.0);
 	glEnd();
 	
 	// 棒の描画
 	glColor3dv(colors[Gray]);
 	glBegin(GL_QUADS);
-	glVertex2d(sqrSize*(x + 1) + sqrSize*1.5 / 5.0, sqrSize*(y + 1) + sqrSize*1.0 / 5.0);
-	glVertex2d(sqrSize*(x + 1) + sqrSize*1.5 / 5.0, sqrSize*(y + 1) + sqrSize*4.0 / 5.0);
-	glVertex2d(sqrSize*(x + 1) + sqrSize*1.0 / 5.0, sqrSize*(y + 1) + sqrSize*4.0 / 5.0);
-	glVertex2d(sqrSize*(x + 1) + sqrSize*1.0 / 5.0, sqrSize*(y + 1) + sqrSize*1.0 / 5.0);
+	glVertex2d(sqrSize*(x + frame) + sqrSize*1.5 / 5.0, sqrSize*(y + frame) + sqrSize*1.0 / 5.0);
+	glVertex2d(sqrSize*(x + frame) + sqrSize*1.5 / 5.0, sqrSize*(y + frame) + sqrSize*4.0 / 5.0);
+	glVertex2d(sqrSize*(x + frame) + sqrSize*1.0 / 5.0, sqrSize*(y + frame) + sqrSize*4.0 / 5.0);
+	glVertex2d(sqrSize*(x + frame) + sqrSize*1.0 / 5.0, sqrSize*(y + frame) + sqrSize*1.0 / 5.0);
 	glEnd();
 }
 
@@ -85,7 +87,7 @@ void displayBoard()
 {
 	// タイトル描画
 	glColor3d(1, 1, 1);
-	glRasterPos2d(sqrSize, sqrSize*4.0 / 5.0);
+	glRasterPos2d(sqrSize*frame, sqrSize+sqrSize*4.0 / 5.0);
 	for (char* str = title; *str; str++) {
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *str);
 	}
@@ -125,7 +127,7 @@ void resize(int w, int h)
 
 	glViewport(0, 0, w, h);
 	glLoadIdentity();
-	glOrtho(0, sqrSize*(sqrNum + 2), sqrSize*(sqrNum + 2), 0, -1.0, 1.0);
+	glOrtho(0, sqrSize*(sqrNum + frame*2), sqrSize*(sqrNum + frame*2), 0, -1.0, 1.0);
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -142,8 +144,8 @@ void keyboard(unsigned char key, int x, int y)
 
 void mouse(int button, int state, int x, int y)
 {
-	int sqrX = x*(sqrNum + 2) / width - 1;
-	int sqrY = y*(sqrNum + 2) / height - 1;
+	int sqrX = x*(sqrNum + frame*2) / width - frame;
+	int sqrY = y*(sqrNum + frame*2) / height - frame;
 
 	// 盤面に収まっているか
 	if (sqrX >= 0 && sqrY >= 0 && sqrX < sqrNum && sqrY < sqrNum) {
