@@ -17,7 +17,7 @@ private:
 	time_t stop;
 
 public:
-	MGTimer() :start(0),stopFlag(false) {}
+	MGTimer() :start(0), stopFlag(false) {}
 
 	// タイマー起動
 	void fire()

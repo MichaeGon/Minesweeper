@@ -8,6 +8,10 @@ extern int width; // ウィンドウの横幅
 extern int height; // ウィンドウの縦幅
 extern char* title; // アプリタイトル
 
+// 色の列挙体 配列colorsを指定するのに使用するのを想定(2とついているもののほうが暗い色)
+enum color { Gray, Blue, Green, Red, Blue2, Brown, Green2, Red2, Purple, Yellow };
+extern double colors[][3]; // 色配列
+
 // 以下OpenGL関連
 
 void display(); // 描画の際呼び出される関数。描画したいときはこの中に書き込むこと

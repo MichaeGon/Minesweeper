@@ -60,7 +60,7 @@ public:
 		int count = 0;
 		for (int i = 0; i < sqrNum; i++) {
 			for (int j = 0; j < sqrNum; j++) {
-				if (board[i][j].Flag()) {
+				if (board[i][j].Flag() && !board[i][j].Pushed()) {
 					count++;
 				}
 			}
