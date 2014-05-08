@@ -1,5 +1,3 @@
-// •À—ñˆ—‚³‚ê‚é‚±‚Æ‚ğ‘O’ñ‚Æ‚µ‚½À‘•‚Å‚·
-
 #ifndef ___MGTIMER___
 #define ___MGTIMER___
 #include <ctime>

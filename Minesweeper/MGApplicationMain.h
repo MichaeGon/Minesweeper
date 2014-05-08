@@ -1,6 +1,5 @@
 #ifndef ___MGAPPLICATIONMAIN___
 #define ___MGAPPLICATIONMAIN___
-#include <omp.h>
 #include <cstdlib>
 #include <iostream>
 #include <GL/glut.h>

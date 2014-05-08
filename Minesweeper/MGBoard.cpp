@@ -144,14 +144,26 @@ void MGBoard::syncall(int i, int j)
 
 void MGBoard::grooping()
 {
+	// èc
 	for (int i = 0; i <sqrNum; i++) {
 		for (int j = 0; j < sqrNum; j++) {
+			syncall(i, j);
+		}
+	}
+	// â°
+	for (int j = 0; j < sqrNum; j++) {
+		for (int i = 0; i < sqrNum; i++) {
 			syncall(i, j);
 		}
 	}
 	// ãtÇ©ÇÁçƒìxçsÇ§
 	for (int i = sqrNum-1; i >= 0; i--) {
 		for (int j = sqrNum-1; j >= 0; j--) {
+			syncall(i, j);
+		}
+	}
+	for (int j = sqrNum - 1; j >= 0; j--) {
+		for (int i = sqrNum - 1; i >= 0; i--) {
 			syncall(i, j);
 		}
 	}
