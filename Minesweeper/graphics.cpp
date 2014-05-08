@@ -120,19 +120,41 @@ void displaySentenceOnBand(char* str)
 
 }
 
-void displayBombNum(int bomb)
+void displayBombNum(int bomb, int flag)
 {
 	// •`‰æ
 	glColor3d(1, 1, 1);
-	glRasterPos2d(sqrSize*(sqrNum-frame), sqrSize*(sqrNum + frame + 4.0 / 5.0));
-	for (char* name = "Bombs : "; *name; name++) {
+	glRasterPos2d(sqrSize*(sqrNum - frame * 2), sqrSize*(sqrNum + frame + 4.0 / 5.0));
+	for (char* name = "Bombs total : "; *name; name++) {
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *name);
+	}
+	flag = bomb - flag;
+	if (flag<0) {
+		flag = 0;
 	}
 	int* num = new int[bomb];
 	int i = 0;
 	while (bomb > 0) {
 		num[i++] = bomb % 10;
 		bomb /= 10;
+	}
+	i--;
+	while (i >= 0) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, numbers[num[i--]]);
+	}
+
+	for (char* str = "  rest :"; *str; str++) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *str);
+	}
+	if (flag > 0) {
+		for (i = 0; flag > 0; i++) {
+			num[i] = flag % 10;
+			flag /= 10;
+		}
+	}
+	else {
+		num[0] = flag;
+		i = 1;
 	}
 	i--;
 	while (i >= 0) {

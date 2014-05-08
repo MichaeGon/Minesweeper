@@ -12,7 +12,7 @@ void display()
 
 	// ボード基盤描画
 	displayBoard();
-	displayBombNum(owner->Model().Bomb());
+	displayBombNum(owner->Model().Bomb(),owner->Model().getFlagNum());
 
 	if (!first) {
 		// 押されたマス目とフラグ描画
@@ -43,7 +43,9 @@ void left(int x, int y)
 
 void right(int x, int y)
 {
-	owner->rightClick(x,y);
+	if (!first) {
+		owner->rightClick(x, y);
+	}
 }
 
 MGApplicationMain::MGApplicationMain(int argc, char** argv) : model()

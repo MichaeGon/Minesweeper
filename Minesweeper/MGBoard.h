@@ -54,6 +54,21 @@ public:
 		return bomb;
 	}
 
+	// flagがたっている数を取得
+	int getFlagNum() const
+	{
+		int count = 0;
+		for (int i = 0; i < sqrNum; i++) {
+			for (int j = 0; j < sqrNum; j++) {
+				if (board[i][j].Flag()) {
+					count++;
+				}
+			}
+		}
+
+		return count;
+	}
+
 	// ゲーム開始時の爆弾配置
 	// 引数にははじめて左クリックされたマス目の位置
 	void initBomb(int x0, int y0);
