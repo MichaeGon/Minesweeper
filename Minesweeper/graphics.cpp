@@ -18,7 +18,7 @@ namespace {
 	const int frame = 2;
 
 	// 数字集
-	char* numbers = "012345678";
+	char* numbers = "0123456789";
 
 	// 色の列挙体 配列colorsを指定するのに使用するのを想定(2とついているもののほうが暗い色)
 	enum color { Gray, Blue, Green, Red, Blue2, Brown, Green2, Red2, Purple, Yellow };
@@ -88,7 +88,7 @@ void displayBoard()
 {
 	// タイトル描画
 	glColor3d(1, 1, 1);
-	glRasterPos2d(sqrSize*frame, sqrSize+sqrSize*4.0 / 5.0);
+	glRasterPos2d(sqrSize*frame, sqrSize*9.0 / 5.0);
 	for (char* str = title; *str; str++) {
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *str);
 	}
@@ -102,7 +102,75 @@ void displayBoard()
 
 void displayTime(time_t elapsed)
 {
+	glRasterPos2d(sqrSize*(sqrNum / 2 + frame), sqrSize*9.0 / 5.0);
+	glColor3d(1, 1, 1);
+	
+	for (char* tmp = "Time  "; *tmp; tmp++) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *tmp);
+	}
 
+	// 秒、分に変換
+	int sec, min;
+	min = elapsed / 60;
+	sec = elapsed % 60;
+
+	int* num = new int[sqrSize];
+	int i = 0;
+	// 分表示
+	if (min > 0) {
+		bool flag = false; // 十の位に0を入れるかどうか
+		if (min / 10 == 0) {
+			// １桁なら十の位に0を入れる
+			flag = !flag;
+		}
+		while (min > 0) {
+			num[i++] = min % 10;
+			min /= 10;
+		}
+		if (flag) {
+			num[i++] = 0;
+		}
+	}
+	else {
+		while (i < 2) {
+			num[i++] = min;
+		}
+	}
+	i--;
+	while (i >= 0) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, numbers[num[i--]]);
+	}
+	
+	for (char* tmp = " : "; *tmp; tmp++) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *tmp);
+	}
+
+	// 秒表示
+	i = 0;
+	if (sec > 0) {
+		bool flag = false;
+		if (sec / 10 == 0) {
+			flag = !flag;
+		}
+		while (sec > 0) {
+			num[i++] = sec % 10;
+			sec /= 10;
+		}
+		if (flag) {
+			num[i++] = 0;
+		}
+	}
+	else {
+		while (i < 2) {
+			num[i++] = sec;
+		}
+	}
+	i--;
+	while (i >= 0) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, numbers[num[i--]]);
+	}
+
+	delete[] num;
 }
 
 void displayGrayBand()
@@ -118,7 +186,7 @@ void displayGrayBand()
 
 void displaySentenceOnBand(char* str, double color[])
 {
-	glRasterPos2d(sqrSize*(sqrNum / 4 + frame), sqrSize*(sqrNum + frame * 2)*1.5 / 3);
+	glRasterPos2d(sqrSize*(sqrNum / 4 + frame * 0.7), sqrSize*(sqrNum + frame * 2)*1.5 / 3);
 	for (; *str; str++) {
 		glColor3dv(color);
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *str);
@@ -128,7 +196,7 @@ void displaySentenceOnBand(char* str, double color[])
 void displaySentenceOnBandRandom(char* str)
 {
 	for (int i = 0; str[i]; i++) {
-		glRasterPos2d(sqrSize*(sqrNum / 4 + frame) + i * 20, sqrSize*(sqrNum + frame * 2)*1.5 / 3);
+		glRasterPos2d(sqrSize*(sqrNum / 4 + frame * 0.7) + i * 20, sqrSize*(sqrNum + frame * 2)*1.5 / 3);
 		glColor3d(rand() % 100 / 100.0, rand() % 100 / 100.0, rand() % 100 / 100.0);
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str[i]);
 	}

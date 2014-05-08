@@ -11,15 +11,36 @@ class MGTimer
 private:
 	// タイマー計測開始時間
 	time_t start;
+	// タイマーを止めるかどうか
+	bool stopFlag;
+	// タイマーを止めた時間(または現在の時間)
+	time_t stop;
 
 public:
-	// オブジェクトが作成された時点から計測開始とする
-	MGTimer() :start(time(NULL)) {}
+	MGTimer() :start(0),stopFlag(false) {}
 
-	// 経過時間を取得(秒)
-	time_t getElapsedTime() const
+	// タイマー起動
+	void fire()
 	{
-		return time(NULL) - start;
+		start = time(NULL);
+	}
+
+	// タイマー停止
+	void Stop()
+	{
+		if (!stopFlag) {
+			stop = time(NULL);
+			stopFlag = !stopFlag;
+		}
+	}
+
+	// 経過時間を取得(秒) ただしタイマー起動前は0を返す
+	time_t getElapsedTime()
+	{
+		if (!stopFlag) {
+			stop = time(NULL);
+		}
+		return start>0 ? stop - start : start;
 	}
 };
 

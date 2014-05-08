@@ -14,6 +14,7 @@ void display()
 	// ボード基盤描画
 	displayBoard();
 	displayBombNum(owner->Model().Bomb(),owner->Model().getFlagNum());
+	displayTime(owner->Timer().getElapsedTime());
 
 	if (!first) {
 		// 押されたマス目とフラグ描画
@@ -55,7 +56,7 @@ void right(int x, int y)
 	}
 }
 
-MGApplicationMain::MGApplicationMain(int argc, char** argv) : model()
+MGApplicationMain::MGApplicationMain(int argc, char** argv) : model(), timer()
 {
 	owner = this;
 
@@ -73,7 +74,7 @@ void MGApplicationMain::appMain()
 	glutReshapeFunc(resize);
 	glutKeyboardFunc(keyboard);
 	glutMouseFunc(mouse);
-	glutIdleFunc(NULL);
+	glutIdleFunc(idle);
 	glClearColor(0.18, 0.18, 0.18, 1.0);
 	glutMainLoop();
 }
@@ -86,6 +87,9 @@ void MGApplicationMain::leftClick(int x, int y)
 
 		// 爆弾を配置する
 		model.initBomb(x, y);
+
+		// タイマー開始
+		timer.fire();
 	}
 	
 	// オープン
@@ -98,8 +102,8 @@ void MGApplicationMain::leftClick(int x, int y)
 	// もし爆弾数と残り空いているマスの数が一致すればクリア
 	if (model.getEmptyNum() == 0 && !clear) {
 		clear = !clear;
+		timer.Stop();
 		cout << '\a';
-		glutIdleFunc(idle);
 	}
 }
 

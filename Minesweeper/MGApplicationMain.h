@@ -13,6 +13,7 @@ using namespace std;
 class MGApplicationMain
 {
 private:
+	MGTimer timer;
 	MGBoard model;
 
 public:
@@ -28,6 +29,12 @@ public:
 	const MGBoard& Model() const
 	{
 		return model;
+	}
+
+	// timer取得
+	MGTimer& Timer()
+	{
+		return timer;
 	}
 
 	// 左クリック時の挙動 引数は押されたマスの場所
