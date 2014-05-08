@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
 #include <GL/glut.h>
 #include "common.h"
 using namespace std;
@@ -108,16 +109,29 @@ void displayGrayBand()
 {
 	glColor3dv(colors[Gray]);
 	glBegin(GL_QUADS);
-	glVertex2d(0, height / 3);
-	glVertex2d(0, height * 2 / 3);
-	glVertex2d(width, height * 2 / 3);
-	glVertex2d(width, height / 3);
+	glVertex2d(0, sqrSize*(sqrNum+frame*2)/3);
+	glVertex2d(0, sqrSize*(sqrNum+frame*2)*2/3);
+	glVertex2d(sqrSize*(sqrNum + frame * 2), sqrSize*(sqrNum + frame * 2) * 2 / 3);
+	glVertex2d(sqrSize*(sqrNum + frame * 2), sqrSize*(sqrNum + frame * 2) / 3);
 	glEnd();
 }
 
-void displaySentenceOnBand(char* str)
+void displaySentenceOnBand(char* str, double color[])
 {
+	glRasterPos2d(sqrSize*(sqrNum / 4 + frame), sqrSize*(sqrNum + frame * 2)*1.5 / 3);
+	for (; *str; str++) {
+		glColor3dv(color);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *str);
+	}
+}
 
+void displaySentenceOnBandRandom(char* str)
+{
+	for (int i = 0; str[i]; i++) {
+		glRasterPos2d(sqrSize*(sqrNum / 4 + frame) + i * 20, sqrSize*(sqrNum + frame * 2)*1.5 / 3);
+		glColor3d(rand() % 100 / 100.0, rand() % 100 / 100.0, rand() % 100 / 100.0);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str[i]);
+	}
 }
 
 void displayBombNum(int bomb, int flag)
@@ -143,7 +157,7 @@ void displayBombNum(int bomb, int flag)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, numbers[num[i--]]);
 	}
 
-	for (char* str = "  rest :"; *str; str++) {
+	for (char* str = "  rest : "; *str; str++) {
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *str);
 	}
 	if (flag > 0) {
@@ -162,6 +176,11 @@ void displayBombNum(int bomb, int flag)
 	}
 
 	delete[] num;
+}
+
+void idle()
+{
+	glutPostRedisplay();
 }
 
 void resize(int w, int h)

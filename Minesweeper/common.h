@@ -17,9 +17,11 @@ void displayPushedPiece(int x, int y, int num); // x,y‚Åw’è‚µ‚½ƒ}ƒX–Ú‚Énum‚ğ•`‰
 void displayFlagPiece(int x, int y); // x,y‚Åw’è‚µ‚½ƒ}ƒX–Ú‚Éƒtƒ‰ƒO‚ğ•`‰æ‚·‚é
 void displayTime(time_t elapsed); // Œo‰ßŠÔ‚ğ•`‰æ‚·‚é
 void displayGrayBand(); // ‰æ–Ê’†‰›‚ğ‰¡’f‚·‚éGray‚Ì‘Ñ‚ğ•\¦‚·‚é(‚±‚Ìã‚É•¶š‚ğ•`‰æ‚·‚é‚±‚Æ‚ğ‘z’è‚µ‚Ä‚¢‚é)
-void displaySentenceOnBand(char* str); // Gray‚Ì‘Ñ‚Ìã‚É•¶š‚ğ•\¦‚·‚é(Fw’è‚ÍŠe©‚ÅB)
+void displaySentenceOnBand(char* str, double color[]); // Gray‚Ì‘Ñ‚Ìã‚É•¶š—ñ‚ğ•\¦‚·‚é
+void displaySentenceOnBandRandom(char* str); // F‚ª‚P•¶š‚¸‚Âƒ‰ƒ“ƒ_ƒ€‚ÅŒˆ‚Ü‚éƒo[ƒWƒ‡ƒ“
 void displayBombNum(int bomb, int flag); // ”š’e”‚Æ‚µ‚Äˆø”‚Ì”’l‚ğ•\¦‚·‚é
 
+void idle(); // ƒAƒjƒ[ƒVƒ‡ƒ“—p
 void resize(int w, int h); // Ä•`‰æ‘O‚Ìˆ—‚ÉŒÄ‚Ño‚³‚ê‚é
 void mouse(int button, int state, int x, int y); // ƒ}ƒEƒX
 void keyboard(unsigned char key, int x, int y); // ƒL[ƒ{[ƒh

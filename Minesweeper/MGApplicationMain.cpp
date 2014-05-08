@@ -3,6 +3,7 @@
 namespace {
 	MGApplicationMain* owner;
 	bool first = true; // はじめて左クリックされるまでtrueでいる
+	bool clear = false; // クリアすればtrueになる
 }
 
 // 描画の際呼び出される 
@@ -30,12 +31,18 @@ void display()
 		}
 	}
 
+	if (clear) {
+		double color[] = { rand() % 100 / 100.0, rand() % 100 / 100.0, rand() % 100 / 100.0 };
+		displayGrayBand();
+		displaySentenceOnBandRandom(" Congratulations!");
+	}
+
 	glutSwapBuffers();
 }
 
 void left(int x, int y)
 {
-	if (!owner->Board(x, y).Flag()) {
+	if (!owner->Board(x, y).Flag() && !clear) {
 		// フラグがたっているところは反応しないようにする
 		owner->leftClick(x, y);
 	}
@@ -43,7 +50,7 @@ void left(int x, int y)
 
 void right(int x, int y)
 {
-	if (!first) {
+	if (!first && !clear) {
 		owner->rightClick(x, y);
 	}
 }
@@ -89,9 +96,10 @@ void MGApplicationMain::leftClick(int x, int y)
 
 	// クリア判定
 	// もし爆弾数と残り空いているマスの数が一致すればクリア
-	if (model.getEmptyNum() == 0) {
-		// クリア判定を書く
-		cout << "\aClear\n";
+	if (model.getEmptyNum() == 0 && !clear) {
+		clear = !clear;
+		cout << '\a';
+		glutIdleFunc(idle);
 	}
 }
 
