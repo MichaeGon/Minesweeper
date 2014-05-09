@@ -107,7 +107,16 @@ void MGBoard::syncall(int i, int j)
 
 		// 周囲の爆弾数0のところとグループ同期
 
-		int x = i, y = j - 1;
+		int x, y;
+		for (x = -1; x <= 1; x++){
+			for (y = -1; y <= 1; y++){
+				if (x + i >= 0 && x + i < sqrNum&&y + j >= 0 && y + j < sqrNum){
+					sync(i, j, x+i, y+j);
+				}
+			}
+		}
+
+		/*int x = i, y = j - 1;
 		if (y >= 0 && y < sqrNum) {
 			// １マス上のマスとグループを同期
 			sync(i, j, x, y);
@@ -126,7 +135,7 @@ void MGBoard::syncall(int i, int j)
 		if (x >= 0 && x < sqrNum) {
 			// １マス右のマスとグループを同期
 			sync(i, j, x, y);
-		}
+		}*/
 
 		// ここまでで周囲とのグループ同期は完了
 		// ここでまだグループ未所属(0)ならば新規グループを作る
