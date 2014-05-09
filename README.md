@@ -1,9 +1,14 @@
 Minesweeper
 ===========
 
-ãƒŽãƒ¼ãƒžãƒ«ãªãƒžã‚¤ãƒ³ã‚¹ã‚¤ãƒ¼ãƒ‘ãƒ¼
+ƒm[ƒ}ƒ‹‚Èƒ}ƒCƒ“ƒXƒC[ƒp[
 
-Visual Studioã§ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã™ã‚‹ã¨ã
-=================================
+ƒIƒuƒWƒFƒNƒg‰»•s”\‚È‚Æ‚±‚ë‚ð–³—‚â‚è‘g‚Ýž‚ñ‚¾‚¹‚¢‚ÅƒIƒuƒWƒFƒNƒgŽwŒü‚ÌªŠ²‚ª—h‚ç‚¢‚Å‚é‚ª‹C‚É‚µ‚È‚¢B<br />
 
-ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒãƒ¼ - ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ - ã€Œãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆåã€ã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ - æ§‹æˆãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ - C/C++ - è¨€èªž ã®ä¸­ã® OpenMPã®ã‚µãƒãƒ¼ãƒˆæ¬„ã‚’ã€Œã¯ã„(/openmp)ã€ã«ã—ã¦ãã ã•ã„
+Visual Studio —p€”õ
+====================
+
++ http://www.xmission.com/~nate/glut.html ‚æ‚èÅV”Åxxxx-bin.zip ‚ðƒ_ƒEƒ“ƒ[ƒh
++ glut.h ‚ÍC:\Program Files(x86)\Microsoft Visual Studio 1x.0\VC\include ‚ÉGLƒtƒHƒ‹ƒ_‚ðì¬‚µ‚Ä‚¢‚ê‚é
++ glut32.lib ‚ÍC:\Program Files(x86)\Microsoft Visual Studio 1x.0\VC\lib ‚É‚¢‚ê‚é
++ glut32.dll ‚Íwindows‚ª64bit‚È‚ç C:\Windows\SysWOW64 ‚Ö32bit‚È‚çC:\Windows\System32 ‚Ö“ü‚ê‚é
