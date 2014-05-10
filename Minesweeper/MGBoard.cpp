@@ -206,3 +206,20 @@ unsigned MGBoard::getEmptyNum()
 
 	return count - bomb;
 }
+
+void MGBoard::newGame()
+{
+	// Œ»İ‚Ìƒ{[ƒh‚ğ”jŠü
+	for (int i = 0; i < sqrNum; i++) {
+		delete[] board[i];
+	}
+	delete[] board;
+
+	// Äæ“¾
+	board = new MGPiece*[sqrNum];
+	for (int i = 0; i < sqrNum; i++) {
+		board[i] = new MGPiece[sqrNum];
+	}
+
+	latest = 1;
+}

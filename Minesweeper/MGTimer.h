@@ -40,6 +40,13 @@ public:
 		}
 		return start>0 ? stop - start : start;
 	}
+
+	// V‹K‘Î‹Çˆ——p
+	void newGame()
+	{
+		start = 0;
+		stopFlag = false;
+	}
 };
 
 #endif

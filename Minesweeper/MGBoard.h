@@ -48,6 +48,9 @@ public:
 	MGBoard();
 	~MGBoard();
 
+	// 新規ゲーム用初期化
+	void newGame();
+
 	// 配置された爆弾数取得
 	int Bomb() const
 	{

@@ -43,7 +43,11 @@ void display()
 
 void left(int x, int y)
 {
-	if (!owner->Board(x, y).Flag() && !clear) {
+	if (clear) {
+		// クリアしてる状態でNewGameボタンが押されたとき
+		owner->newGame();
+	}
+	else if (!owner->Board(x, y).Flag()) {
 		// フラグがたっているところは反応しないようにする
 		owner->leftClick(x, y);
 	}
@@ -111,6 +115,16 @@ void MGApplicationMain::rightClick(int x, int y)
 {
 	// フラグ反転
 	model[x][y].setFlag();
+
+	glutPostRedisplay();
+}
+
+void MGApplicationMain::newGame()
+{
+	clear = false;
+	first = true;
+	timer.newGame();
+	model.newGame();
 
 	glutPostRedisplay();
 }

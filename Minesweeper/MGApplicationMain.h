@@ -36,6 +36,9 @@ public:
 		return timer;
 	}
 
+	// 新規ゲーム開始
+	void newGame();
+
 	// 左クリック時の挙動 引数は押されたマスの場所
 	void leftClick(int x, int y);
 
