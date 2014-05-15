@@ -2,11 +2,10 @@
 #define ___MGTIMER___
 #include <ctime>
 #include "common.h"
-using namespace std;
 
 class MGTimer
 {
-private:
+protected:
 	// タイマー計測開始時間
 	time_t start;
 	// タイマーを止めるかどうか

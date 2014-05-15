@@ -10,7 +10,7 @@ using namespace std;
 
 class MGBoard
 {
-private:
+protected:
 	// 盤面データ
 	MGPiece** board;
 	// 最新グループ(次に作るグループ)

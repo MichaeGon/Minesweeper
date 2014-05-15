@@ -1,9 +1,7 @@
 #include <cstdlib>
 #include <ctime>
-#include <iostream>
 #include <GL/glut.h>
 #include "common.h"
-using namespace std;
 
 char* title = "Minesweeper";
 int sqrNum = 10;
@@ -24,13 +22,12 @@ double colors[][3] = {
 	{ 1.0, 1.0, 0.0 }
 };
 
+// マス目の一辺大きさ
+const int sqrSize = 50;
+// 盤面外にマス目何マス分余白を作るか
+const int frame = 2;
+
 namespace {
-
-	// マス目の一辺大きさ
-	const int sqrSize = 50;
-	// 盤面外にマス目何マス分余白を作るか
-	const int frame = 2;
-
 	// 数字集(１６進数も用意)
 	char* numbers = "0123456789abcdef";
 }

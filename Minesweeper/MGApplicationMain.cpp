@@ -33,7 +33,6 @@ void display()
 	}
 
 	if (clear) {
-		double color[] = { rand() % 100 / 100.0, rand() % 100 / 100.0, rand() % 100 / 100.0 };
 		displayGrayBand();
 		displaySentenceOnBandRandom(" Congratulations!");
 	}
@@ -107,7 +106,6 @@ void MGApplicationMain::leftClick(int x, int y)
 	if (model.getEmptyNum() == 0 && !clear) {
 		clear = !clear;
 		timer.Stop();
-		cout << '\a';
 	}
 }
 
