@@ -2,8 +2,6 @@
 
 namespace {
 	MGApplicationMain* owner;
-	bool first = true; // はじめて左クリックされるまでtrueでいる
-	bool clear = false; // クリアすればtrueになる
 }
 
 // 描画の際呼び出される 
@@ -14,9 +12,9 @@ void display()
 	// ボード基盤描画
 	displayBoard();
 	displayBombNum(owner->Model()->Bomb(),owner->Model()->getFlagNum());
-	displayTime(owner->Timer().getElapsedTime());
+	displayTime(owner->Timer()->getElapsedTime());
 
-	if (!first) {
+	if (!owner->First()) {
 		// 押されたマス目とフラグ描画
 		for (int i = 0; i < sqrNum; i++) {
 			for (int j = 0; j < sqrNum; j++) {
@@ -32,7 +30,7 @@ void display()
 		}
 	}
 
-	if (clear) {
+	if (owner->Clear()) {
 		displayGrayBand();
 		displaySentenceOnBandRandom(" Congratulations!");
 	}
@@ -42,7 +40,7 @@ void display()
 
 void left(int x, int y)
 {
-	if (clear) {
+	if (owner->Clear()) {
 		// クリアしてる状態でNewGameボタンが押されたとき
 		owner->newGame();
 	}
@@ -54,16 +52,19 @@ void left(int x, int y)
 
 void right(int x, int y)
 {
-	if (!first && !clear) {
+	if (!owner->First() && !owner->Clear()) {
 		owner->rightClick(x, y);
 	}
 }
 
-MGApplicationMain::MGApplicationMain(int argc, char** argv) :timer()
+MGApplicationMain::MGApplicationMain(int argc, char** argv) :first(true), menu(true), clear(false)
 {
 	owner = this;
 
-	model = new MGFixedBoard();
+	model = NULL;
+	timer = NULL;
+
+	init<MGFixedBoard>();
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
@@ -75,11 +76,12 @@ MGApplicationMain::MGApplicationMain(int argc, char** argv) :timer()
 MGApplicationMain::~MGApplicationMain()
 {
 	delete model;
+	delete timer;
 }
 
 void MGApplicationMain::appMain()
 {
-	// まずはウィンドウを表示してプレイヤーの指示待ちとする
+	// まずはメニュー描画
 	glutDisplayFunc(display);
 	glutReshapeFunc(resize);
 	glutKeyboardFunc(keyboard);
@@ -99,7 +101,7 @@ void MGApplicationMain::leftClick(int x, int y)
 		model->initBomb(x, y);
 
 		// タイマー開始
-		timer.fire();
+		timer->fire();
 	}
 	
 	// オープン
@@ -112,7 +114,7 @@ void MGApplicationMain::leftClick(int x, int y)
 	// もし爆弾数と残り空いているマスの数が一致すればクリア
 	if (model->isClear() && !clear) {
 		clear = !clear;
-		timer.Stop();
+		timer->stop();
 	}
 }
 
@@ -128,7 +130,7 @@ void MGApplicationMain::newGame()
 {
 	clear = false;
 	first = true;
-	timer.newGame();
+	timer->newGame();
 	model->newGame();
 
 	glutPostRedisplay();

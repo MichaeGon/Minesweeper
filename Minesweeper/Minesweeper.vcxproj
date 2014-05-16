@@ -93,8 +93,10 @@
     <ClInclude Include="MGBoard.h" />
     <ClInclude Include="MGFixedBoard.h" />
     <ClInclude Include="MGFixedPiece.h" />
+    <ClInclude Include="MGFixedTimer.h" />
     <ClInclude Include="MGMovingBoard.h" />
     <ClInclude Include="MGMovingPiece.h" />
+    <ClInclude Include="MGMovingTimer.h" />
     <ClInclude Include="MGPiece.h" />
     <ClInclude Include="MGTimer.h" />
   </ItemGroup>

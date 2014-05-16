@@ -25,43 +25,34 @@
     <Filter Include="ソース ファイル\Moving">
       <UniqueIdentifier>{1a023d4e-7fe5-488b-9b0c-3ef543c5372f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Common">
+      <UniqueIdentifier>{be8c39fa-9f16-4fe9-925c-f40c31a6b27a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Common">
+      <UniqueIdentifier>{51ff0975-3c78-4820-aa83-6c9de9163ef8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="MGApplicationMain.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="MGBoard.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="MGFixedBoard.cpp">
       <Filter>ソース ファイル\Fixed</Filter>
     </ClCompile>
     <ClCompile Include="MGMovingBoard.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Moving</Filter>
+    </ClCompile>
+    <ClCompile Include="MGBoard.cpp">
+      <Filter>ソース ファイル\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="MGApplicationMain.cpp">
+      <Filter>ソース ファイル\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics.cpp">
+      <Filter>ソース ファイル\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MGApplicationMain.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="MGBoard.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="common.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="MGPiece.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="MGTimer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="MGFixedPiece.h">
       <Filter>ヘッダー ファイル\Fixed</Filter>
     </ClInclude>
@@ -72,7 +63,28 @@
       <Filter>ヘッダー ファイル\Fixed</Filter>
     </ClInclude>
     <ClInclude Include="MGMovingBoard.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Moving</Filter>
+    </ClInclude>
+    <ClInclude Include="MGFixedTimer.h">
+      <Filter>ヘッダー ファイル\Fixed</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMovingTimer.h">
+      <Filter>ヘッダー ファイル\Moving</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="MGApplicationMain.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="MGBoard.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="MGPiece.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="MGTimer.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

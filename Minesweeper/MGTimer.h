@@ -5,47 +5,20 @@
 
 class MGTimer
 {
-protected:
-	// タイマー計測開始時間
-	time_t start;
-	// タイマーを止めるかどうか
-	bool stopFlag;
-	// タイマーを止めた時間(または現在の時間)
-	time_t stop;
-
 public:
-	MGTimer() :start(0), stopFlag(false) {}
+	virtual ~MGTimer() {}
 
 	// タイマー起動
-	void fire()
-	{
-		start = time(NULL);
-	}
+	virtual void fire() = 0;
 
 	// タイマー停止
-	void Stop()
-	{
-		if (!stopFlag) {
-			stop = time(NULL);
-			stopFlag = !stopFlag;
-		}
-	}
+	virtual void stop() = 0;
 
 	// 経過時間を取得(秒) ただしタイマー起動前は0を返す
-	time_t getElapsedTime()
-	{
-		if (!stopFlag) {
-			stop = time(NULL);
-		}
-		return start>0 ? stop - start : start;
-	}
+	virtual time_t getElapsedTime() = 0;
 
 	// 新規対局処理用
-	void newGame()
-	{
-		start = 0;
-		stopFlag = false;
-	}
+	virtual void newGame() = 0;
 };
 
 #endif
