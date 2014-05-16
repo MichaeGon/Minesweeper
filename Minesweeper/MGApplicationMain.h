@@ -3,6 +3,8 @@
 #include <cstdlib>
 #include <GL/glut.h>
 #include "MGBoard.h"
+#include "MGFixedBoard.h"
+#include "MGFixedPiece.h"
 #include "MGPiece.h"
 #include "MGTimer.h"
 #include "common.h"
@@ -11,19 +13,20 @@ class MGApplicationMain
 {
 private:
 	MGTimer timer;
-	MGBoard model;
+	MGBoard* model;
 
 public:
 	MGApplicationMain(int argc, char** argv);
+	~MGApplicationMain();
 
 	// model.board[x][y]にアクセスする
-	MGPiece& Board(int x, int y)
+	MGPiece* Board(int x, int y)
 	{
-		return model[x][y];
+		return (*model)[x][y];
 	}
 
 	// model取得
-	const MGBoard& Model() const
+	MGBoard* Model()
 	{
 		return model;
 	}
