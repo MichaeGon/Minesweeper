@@ -40,7 +40,11 @@ void display()
 
 void left(int x, int y)
 {
-	if (owner->Clear()) {
+	if (owner->Menu()) {
+		owner->setMenu();
+		owner->init<MGFixedBoard>();
+	}
+	else if (owner->Clear()) {
 		// クリアしてる状態でNewGameボタンが押されたとき
 		owner->newGame();
 	}
@@ -64,7 +68,7 @@ MGApplicationMain::MGApplicationMain(int argc, char** argv) :first(true), menu(t
 	model = NULL;
 	timer = NULL;
 
-	init<MGFixedBoard>();
+	//init<MGFixedBoard>();
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
@@ -82,10 +86,11 @@ MGApplicationMain::~MGApplicationMain()
 void MGApplicationMain::appMain()
 {
 	// まずはメニュー描画
-	glutDisplayFunc(display);
-	glutReshapeFunc(resize);
+	glutPassiveMotionFunc(passive);
+	glutDisplayFunc(mdisplay);
+	glutReshapeFunc(mresize);
 	glutKeyboardFunc(keyboard);
-	glutMouseFunc(mouse);
+	glutMouseFunc(mmouse);
 	glutIdleFunc(idle);
 	glClearColor(0.18, 0.18, 0.18, 1.0);
 	glutMainLoop();

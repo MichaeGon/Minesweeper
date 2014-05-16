@@ -6,7 +6,7 @@
 char* title = "Minesweeper";
 int sqrNum = 10;
 int width = 600;
-int height = 600;
+int height = 300;
 
 // 色配列
 double colors[][3] = {
@@ -30,6 +30,9 @@ const int frame = 2;
 namespace {
 	// 数字集(１６進数も用意)
 	char* numbers = "0123456789abcdef";
+	
+	// 固定型かどうか
+	bool isFixed = true;
 }
 
 
@@ -291,4 +294,79 @@ void mouse(int button, int state, int x, int y)
 			break;
 		}
 	}
+}
+
+
+// 以下メニュー関連
+
+void passive(int x, int y)
+{
+	isFixed = (x < width / 2) ? true : false;
+	glutPostRedisplay();
+}
+
+void mmouse(int button, int state, int x, int y)
+{
+	switch (button) {
+	case GLUT_LEFT_BUTTON:
+		if (state == GLUT_DOWN) {
+			if (isFixed) {
+				left(0, 0);
+			}
+			else {
+				//cout << "Moving Minesweeper\n";
+			}
+		}
+		glutPassiveMotionFunc(NULL);
+		height = 600;
+		glutDisplayFunc(display);
+		glutMouseFunc(mouse);
+		glutReshapeFunc(resize);
+		glutReshapeWindow(width, height);
+		glutPostRedisplay();
+		break;
+	default:
+		break;
+	}
+}
+
+void mresize(int w, int h)
+{
+	glutReshapeWindow(width, height);
+	glViewport(0, 0, width, height);
+	glLoadIdentity();
+
+	glOrtho(0, width, height, 0, -1, 1);
+}
+
+void mdisplay()
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	char* fix = "Fixed";
+	char* moving = "Moving";
+
+	glColor3d(0, 0, 0);
+	glBegin(GL_QUADS);
+	glVertex2d(width / 2, 0);
+	glVertex2d(width / 2, height);
+	glVertex2d(isFixed ? width : 0, height);
+	glVertex2d(isFixed ? width : 0, 0);
+	glEnd();
+	// draw title
+	glColor3d(1, 1, 1);
+	glRasterPos2d(width / 2.6, height / 4);
+	for (char* str = title; *str; str++) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *str);
+	}
+	glRasterPos2d(width / 5, height * 3 / 5);
+	for (char* str = fix; *str; str++) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *str);
+	}
+	glRasterPos2d(width * 2 / 3, height * 3 / 5);
+	for (char* str = moving; *str; str++) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *str);
+	}
+
+	glutSwapBuffers();
 }

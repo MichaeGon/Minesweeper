@@ -84,6 +84,18 @@ public:
 		return clear;
 	}
 
+	// menuæ“¾
+	bool Menu() const
+	{
+		return menu;
+	}
+
+	// menu”½“]
+	void setMenu()
+	{
+		menu = !menu;
+	}
+
 	// V‹KƒQ[ƒ€ŠJn
 	void newGame();
 

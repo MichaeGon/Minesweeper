@@ -33,4 +33,11 @@ void keyboard(unsigned char key, int x, int y); // キーボード
 void left(int x, int y);
 void right(int x, int y);
 
+// 以下メニュー用関数
+void mdisplay(); // display
+void mresize(int w,int h); // resize
+void mmouse(int button, int state, int x, int y); // mouse
+void passive(int x, int y); // マウスの位置
+
+
 #endif
