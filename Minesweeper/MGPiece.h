@@ -6,25 +6,13 @@
 class MGPiece
 {
 protected:
-	unsigned long group; // グループ
 	int num; // 周囲の爆弾数 SENTINELでそのマスは爆弾
 	bool flag; // フラグ
 	bool pushed; // 押されたかどうか
 
 public:
-	MGPiece() :group(0), num(0), flag(false), pushed(false) {}
-
-	// 変換コンストラクタ
-	MGPiece(unsigned long val)
-	{
-		group = val;
-	}
-
-	// group取得
-	unsigned long Group() const
-	{
-		return group;
-	}
+	MGPiece() :num(0), flag(false), pushed(false) {}
+	virtual ~MGPiece() {}
 
 	// num取得
 	int Num() const
@@ -66,6 +54,7 @@ public:
 
 	// 以下は演算子多重定義
 
+	// 注意：MGPieceのポインタ型pに対して行うときは++(*p) (*p)++のようにかっこでくくる。
 	// ++演算子はnumについて行う
 	// 前置型
 	MGPiece& operator++()
@@ -85,20 +74,6 @@ public:
 		}
 
 		return tmp;
-	}
-
-	// |=はgroupに適用する
-	MGPiece& operator|=(const MGPiece& right)
-	{
-		group |= right.group;
-
-		return *this;
-	}
-
-	// &はgroupに適用する
-	friend unsigned long operator&(const MGPiece& left, const MGPiece& right)
-	{
-		return left.group & right.group;
 	}
 };
 

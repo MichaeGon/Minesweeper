@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Fixed">
+      <UniqueIdentifier>{40ddb5cb-b92d-4017-87f5-4108a68afc80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Moving">
+      <UniqueIdentifier>{a4cb8f31-cc8e-4116-b5f0-dd8375d4c454}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Fixed">
+      <UniqueIdentifier>{a74637c9-4a50-4c96-a04f-aca787b7be25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Moving">
+      <UniqueIdentifier>{1a023d4e-7fe5-488b-9b0c-3ef543c5372f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -25,6 +37,12 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="graphics.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="MGFixedBoard.cpp">
+      <Filter>ソース ファイル\Fixed</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMovingBoard.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,6 +60,18 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="MGTimer.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="MGFixedPiece.h">
+      <Filter>ヘッダー ファイル\Fixed</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMovingPiece.h">
+      <Filter>ヘッダー ファイル\Moving</Filter>
+    </ClInclude>
+    <ClInclude Include="MGFixedBoard.h">
+      <Filter>ヘッダー ファイル\Fixed</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMovingBoard.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
