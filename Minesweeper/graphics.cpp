@@ -266,6 +266,17 @@ void keyboard(unsigned char key, int x, int y)
 	case 'Q':
 	case '\033':
 		exit(0); // 改善の余地あり
+	case 'm':
+	case 'M':
+		// メニューへ
+		glutDisplayFunc(mdisplay);
+		glutPassiveMotionFunc(passive);
+		glutReshapeFunc(mresize);
+		glutMouseFunc(mmouse);
+		height = 300;
+		glutReshapeWindow(width, height);
+		glutPostRedisplay();
+		break;
 	default:
 		break;
 	}
